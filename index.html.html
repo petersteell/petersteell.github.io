@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Morning Reset — Peter Steell</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --dark: #0e0d0b;
+    --dark-2: #161410;
+    --dark-3: #1e1b16;
+    --gold: #c9923a;
+    --gold-light: #e8b96a;
+    --gold-pale: #f5e4c3;
+    --cream: #f7f1e8;
+    --text-muted: #9a8e7d;
+    --text-dim: #6b6155;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--dark);
+    color: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 80px 24px 60px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    bottom: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(ellipse at center, rgba(201,146,58,0.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 79px,
+      rgba(255,255,255,0.015) 79px,
+      rgba(255,255,255,0.015) 80px
+    );
+    pointer-events: none;
+  }
+
+  .eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 32px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .eyebrow::before,
+  .eyebrow::after {
+    content: '—';
+    margin: 0 12px;
+    color: var(--gold-light);
+    opacity: 0.5;
+  }
+
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(52px, 8vw, 96px);
+    font-weight: 300;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--cream);
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+
+  .hero-sub {
+    margin-top: 28px;
+    font-size: 17px;
+    color: var(--text-muted);
+    max-width: 480px;
+    position: relative;
+    z-index: 1;
+    line-height: 1.75;
+  }
+
+  .divider {
+    width: 1px;
+    height: 60px;
+    background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+    margin: 48px auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ─── STORY ─── */
+  .section {
+    padding: 100px 24px;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+    display: block;
+  }
+
+  h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 5vw, 56px);
+    font-weight: 300;
+    line-height: 1.15;
+    color: var(--cream);
+    margin-bottom: 32px;
+  }
+
+  h2 em { font-style: italic; color: var(--gold-light); }
+
+  p {
+    font-size: 16px;
+    color: #c5b89e;
+    margin-bottom: 20px;
+    line-height: 1.85;
+  }
+
+  .pullquote {
+    border-left: 2px solid var(--gold);
+    padding: 4px 0 4px 28px;
+    margin: 44px 0;
+  }
+
+  .pullquote p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(22px, 3vw, 30px);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--gold-pale);
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  /* ─── MILESTONES ─── */
+  .milestones {
+    background: var(--dark-2);
+    padding: 100px 24px;
+  }
+
+  .milestones-inner {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .timeline {
+    margin-top: 52px;
+    position: relative;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 16px;
+    top: 8px;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+  }
+
+  .timeline-item {
+    display: flex;
+    gap: 28px;
+    margin-bottom: 40px;
+    position: relative;
+  }
+
+  .tl-dot {
+    width: 33px;
+    height: 33px;
+    min-width: 33px;
+    border-radius: 50%;
+    border: 1px solid var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    color: var(--gold);
+    letter-spacing: 0.05em;
+    background: var(--dark-2);
+    position: relative;
+    z-index: 1;
+  }
+
+  .tl-content h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--cream);
+    margin-bottom: 6px;
+  }
+
+  .tl-content p {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin: 0;
+    line-height: 1.65;
+  }
+
+  /* ─── OFFER ─── */
+  .offer-section {
+    padding: 120px 24px;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .offer-card {
+    background: var(--dark-3);
+    border: 1px solid rgba(201,146,58,0.25);
+    border-radius: 2px;
+    padding: 56px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .offer-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+  }
+
+  .offer-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 42px;
+    font-weight: 300;
+    color: var(--cream);
+    margin-bottom: 8px;
+  }
+
+  .offer-duration {
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 32px;
+    display: block;
+  }
+
+  .offer-items {
+    list-style: none;
+    margin: 0 0 40px;
+  }
+
+  .offer-items li {
+    font-size: 15px;
+    color: #c5b89e;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    line-height: 1.5;
+  }
+
+  .offer-items li::before {
+    content: '✦';
+    color: var(--gold);
+    font-size: 8px;
+    margin-top: 5px;
+    flex-shrink: 0;
+  }
+
+  .price-row {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 36px;
+  }
+
+  .price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 56px;
+    font-weight: 300;
+    color: var(--cream);
+  }
+
+  .price-note {
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  .cta-btn {
+    display: block;
+    width: 100%;
+    padding: 18px 32px;
+    background: var(--gold);
+    color: var(--dark);
+    text-align: center;
+    text-decoration: none;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    border-radius: 1px;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .cta-btn:hover {
+    background: var(--gold-light);
+    transform: translateY(-1px);
+  }
+
+  .cta-sub {
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-dim);
+    margin-top: 14px;
+  }
+
+  /* ─── FOR WHO ─── */
+  .for-section {
+    background: var(--dark-2);
+    padding: 100px 24px;
+  }
+
+  .for-inner {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .for-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 48px;
+  }
+
+  @media (max-width: 600px) {
+    .for-grid { grid-template-columns: 1fr; }
+    .offer-card { padding: 36px 24px; }
+  }
+
+  .for-card {
+    padding: 28px 24px;
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 2px;
+  }
+
+  .for-card p {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin: 0;
+    line-height: 1.7;
+  }
+
+  .for-card p::before {
+    content: '→ ';
+    color: var(--gold);
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    padding: 60px 24px;
+    text-align: center;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .footer-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 300;
+    color: var(--gold-pale);
+    margin-bottom: 8px;
+  }
+
+  footer p {
+    font-size: 13px;
+    color: var(--text-dim);
+    margin: 0;
+  }
+
+  footer a {
+    color: var(--gold);
+    text-decoration: none;
+  }
+
+  /* ─── ANIMATION ─── */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(24px);
+    animation: fadeUp 0.9s ease forwards;
+  }
+
+  .fade-in:nth-child(1) { animation-delay: 0.1s; }
+  .fade-in:nth-child(2) { animation-delay: 0.3s; }
+  .fade-in:nth-child(3) { animation-delay: 0.5s; }
+  .fade-in:nth-child(4) { animation-delay: 0.7s; }
+
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <p class="eyebrow fade-in">Peter Steell</p>
+  <h1 class="fade-in">I died.<br><em>Then I woke up.</em></h1>
+  <p class="hero-sub fade-in">I overdosed and fell into a coma. In the darkness I saw a light — and a hand reaching down. I grabbed it. I woke up. Now I help others build the one practice that changed everything — a morning rooted in gratitude, presence, and choice.</p>
+  <div class="divider fade-in"></div>
+</section>
+
+<!-- STORY -->
+<section class="section">
+  <span class="section-label">The Story</span>
+  <h2>From federal prison<br>to <em>Costa Rica</em></h2>
+
+  <p>I grew up in Calgary, labelled "difficult" from the start. ADHD, school suspensions, shoplifting as a kid. Before I was a teenager I was already stealing cars, doing robberies. By fourteen, juvenile detention.</p>
+
+  <p>At twenty-four I moved to Arizona to open my first restaurant. A real dream. By twenty-six, addiction had swallowed it whole and I was back in Calgary — this time sliding into the drug trade. I stayed there until thirty-three, when I was arrested and sent to federal prison.</p>
+
+  <p>I got out and built something legitimate — a real tire shop, a proper business, a second chance. Then I gave that away too. Addiction took it just like it took everything else.</p>
+
+  <div class="pullquote">
+    <p>"I looked at my life and thought — if this is all there is, what's the point?"</p>
+  </div>
+
+  <p>About two years later came the overdose. I was found in a basement, unresponsive, after twelve hours. What happened next, I've never been able to fully explain.</p>
+
+  <p>In the coma, I was in a black hole — total darkness, no sound, no light. Then a brightness began to open above me. And a hand came down into that darkness. I reached up and grabbed it. And I woke up.</p>
+
+  <p>I spent months in physio and cognitive therapy rebuilding the most basic motor functions and cognitive abilities — things most people never have to think about. And when I was steady enough to stand, my mother pointed me toward <strong style="color: var(--cream); font-weight: 400;">Choose Again</strong>, a spiritual recovery center in Costa Rica. I arrived broken. I left transformed.</p>
+
+  <p>Today I live in Costa Rica as a facilitator at Choose Again. I work with people one-on-one. I facilitate circles. I cook for the center — full circle. And every single morning, I practice what I teach.</p>
+
+  <div class="pullquote">
+    <p>"I am grateful for all of it. Every arrest, every loss, every relapse — it all led me here. To a life where I get to choose love over fear in every moment, by watching my mind and practicing the six steps."</p>
+  </div>
+</section>
+
+<!-- MILESTONES -->
+<section class="milestones">
+  <div class="milestones-inner">
+    <span class="section-label">The Journey</span>
+    <h2>Every scar has<br>a <em>lesson</em></h2>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="tl-dot">14</div>
+        <div class="tl-content">
+          <h3>Juvenile detention</h3>
+          <p>Years of shoplifting, car theft, and robberies led to arrest and three months in juvie — where I learned to survive by wearing masks.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-dot">24</div>
+        <div class="tl-content">
+          <h3>First restaurant — Arizona</h3>
+          <p>Opened my first restaurant in Paradise Valley. A real dream. By twenty-six, addiction had closed it and sent me home to Calgary.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-dot">26</div>
+        <div class="tl-content">
+          <h3>The drug trade</h3>
+          <p>Back in Calgary. Quick money, false belonging. Seven years in the trade until the law caught up.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-dot">33</div>
+        <div class="tl-content">
+          <h3>Federal prison & the tire shop</h3>
+          <p>Arrested, convicted, federal prison. Got out and built a legitimate tire shop — a real second chance. Then addiction took that too.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-dot">35</div>
+        <div class="tl-content">
+          <h3>The overdose & the hand</h3>
+          <p>Found unresponsive after twelve hours. In the coma — total darkness. Then a light. Then a hand reaching down. I grabbed it and woke up. Months of physio and cognitive therapy to rebuild what the overdose took.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-dot">Now</div>
+        <div class="tl-content">
+          <h3>Facilitator at Choose Again, Costa Rica</h3>
+          <p>Living proof that you can return to love — no matter how far you've gone. Guiding others home.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THE OFFER -->
+<section class="offer-section">
+  <span class="section-label">Work With Peter</span>
+  <h2>The Morning<br><em>Reset</em></h2>
+  <p style="margin-bottom: 48px;">Four weeks. One-on-one. Built around the morning practice that brought me back from the edge — and has helped everyone I've walked it with since.</p>
+
+  <div class="offer-card">
+    <p class="offer-title">4-Week Morning Reset</p>
+    <span class="offer-duration">1-on-1 Coaching with Peter Steell</span>
+
+    <ul class="offer-items">
+      <li>Weekly 60-minute Zoom session — we go deep on your story, your blocks, your morning</li>
+      <li>Daily WhatsApp check-in — accountability and guidance every single day of the program</li>
+      <li>Peter's personal morning gratitude framework — the exact practice he does every day</li>
+      <li>A Course in Miracles principles applied to your real life situations</li>
+      <li>Voice note support between sessions — you're never navigating alone</li>
+    </ul>
+
+    <a href="https://calendly.com/petersteell31/free-20-discovery-call" class="cta-btn">Book Your Free 20-Min Discovery Call</a>
+    <p class="cta-sub">No pressure. Just a real conversation. I only take people I know I can truly help.</p>
+  </div>
+</section>
+
+<!-- FOR WHO -->
+<section class="for-section">
+  <div class="for-inner">
+    <span class="section-label">Is This For You?</span>
+    <h2>This is for you<br>if <em>any of this lands</em></h2>
+
+    <div class="for-grid">
+      <div class="for-card"><p>You're in recovery or rebuilding after addiction and don't know how to start mornings without the fog</p></div>
+      <div class="for-card"><p>You're struggling with anxiety or depression and wake up dreading the day</p></div>
+      <div class="for-card"><p>You've tried journaling, meditation apps, morning routines — and nothing sticks</p></div>
+      <div class="for-card"><p>You feel guilty, disconnected, or like something's fundamentally wrong with you</p></div>
+      <div class="for-card"><p>You're done pretending everything's fine and ready to do something real</p></div>
+      <div class="for-card"><p>You want to be guided by someone who's actually been in the darkness, not someone who read about it</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p class="footer-name">Peter Steell</p>
+  <p>Follow the daily practice → <a href="https://instagram.com/peter.steell.2025">@peter.steell.2025</a></p>
+  <p style="margin-top: 10px; font-size: 11px; color: #3d3630;">Costa Rica · Choose Again Facilitation Center</p>
+</footer>
+
+</body>
+</html>
